@@ -108,50 +108,18 @@ static NSString *const kDSSliderViewCellIdentifier = @"kDSSliderViewCellIdentifi
 
 - (void)setUpPagControl
 {
-    
-    CGSize  size = [self pageControlSize];
-    CGPoint point = CGPointZero;
     switch (self.pageControlMode) {
         case DSPageControlModeNone:
-        {
             self.pageControl.hidden = YES;
             break;
-        }
-        case DSPageControlModeBottomCenter:
-        {
-            point = CGPointMake(self.center.x-self.dotViewMargin *[self itemCounts],self.frame.size.height *0.8);
-            break;
-        }
-        case DSPageControlModeBottomRight:
-        {
-            point=CGPointMake(self.frame.size.width - size.width - 10, self.frame.size.height *0.8);
-            break;
-        }
+            
         default:
+            [self insertSubview:self.pageControl aboveSubview:self.sliderView];
+            self.pageControl.pageControlMode = self.pageControlMode;
+            self.pageControl.hidden = NO;
             break;
     }
-    
-    [self insertSubview:self.pageControl aboveSubview:self.sliderView];
-    self.pageControl.hidden = NO;
-    CGFloat offsetX = self.pageControlInsets.right - self.pageControlInsets.left;
-    CGFloat offsetY = self.pageControlInsets.bottom - self.pageControlInsets.top;
-    self.pageControl.frame = CGRectMake(point.x + offsetX, point.y + offsetY, size.width, size.height);
-    self.pageControl.center = CGPointMake(self.center.x, self.pageControl.center.y);
 }
-
-- (CGSize)pageControlSize
-{
-    CGFloat width = self.dotViewSize.width;
-    CGFloat height = self.dotViewSize.height;
-    NSUInteger count = [self itemCounts];
-    if(width == 0 && height ==0){
-        width =7;
-        height=7;
-    }
-    
-    return CGSizeMake(width*count + self.dotViewMargin*(count-1), height);
-}
-
 - (NSDictionary *)cellItemDataAtIndex:(NSInteger)index
 {
     NSDictionary *dict = self.attributs[index];
@@ -317,7 +285,6 @@ static NSString *const kDSSliderViewCellIdentifier = @"kDSSliderViewCellIdentifi
     }
     return _sliderView;
 }
-
 - (DSPageControl *)pageControl
 {
     if(_pageControl == nil){
@@ -325,7 +292,7 @@ static NSString *const kDSSliderViewCellIdentifier = @"kDSSliderViewCellIdentifi
         _pageControl.currentPage = 0;
         _pageControl.numberOfPages = [self itemCounts];
         _pageControl.hidesForSinglePage = YES;
-        [_pageControl sizeToFit];
+        _pageControl.pageControlMode = self.pageControlMode;
     }
     return _pageControl;
 }
@@ -383,6 +350,11 @@ static NSString *const kDSSliderViewCellIdentifier = @"kDSSliderViewCellIdentifi
 {
     _dotViewSize = dotViewSize;
     self.pageControl.dotViewSize = dotViewSize;
+}
+- (void)setPageControlInsets:(UIEdgeInsets)pageControlInsets
+{
+    _pageControlInsets = pageControlInsets;
+    self.pageControl.pageControlInsets = pageControlInsets;
 }
 
 @end

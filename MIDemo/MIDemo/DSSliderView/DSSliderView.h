@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger, DSPageControlMode) {
     
     DSPageControlModeNone,
     DSPageControlModeBottomCenter,
+    DSPageControlModeBottomLeft,
     DSPageControlModeBottomRight
 };
 

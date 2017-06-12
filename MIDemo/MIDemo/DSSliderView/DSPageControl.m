@@ -8,27 +8,74 @@
 
 #import "DSPageControl.h"
 
+static const CGFloat defaultLeftRightMargin = 15;
+
 @implementation DSPageControl
-
-
- - (void)setCurrentPage:(NSInteger)currentPage
+- (void)setCurrentPage:(NSInteger)currentPage
 {
     [super setCurrentPage:currentPage];
-    self.backgroundColor  =[UIColor blackColor];
-//    if(self.currentPageIndicatorImage && self.pageIndicatorImage){
-//        [self setUpDots];
-//    }
+    if(self.currentPageIndicatorImage && self.pageIndicatorImage){
+        [self setUpDots];
+    }
+}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    //self frame
+    if(!self.superview) return;
+    CGFloat pageControlX = self.superview.frame.size.width*0.5;
+    CGFloat pageControlY = self.superview.frame.size.height *0.8;
+    CGFloat pageControlW = [self pageControlWidth];
+    CGFloat pageControlH = [self pageControlHeight];
+    // offset
+    CGFloat offsetX  = self.pageControlInsets.right - self.pageControlInsets.left;
+    CGFloat offsetY = + self.pageControlInsets.bottom - self.pageControlInsets.top;
+    switch (self.pageControlMode) {
+        case DSPageControlModeBottomCenter:
+        {
+            self.frame = CGRectMake(0, pageControlY+offsetY, pageControlW, pageControlH);
+            self.center = CGPointMake(pageControlX+offsetX, self.center.y);
+            break;
+        }
+        case DSPageControlModeBottomRight:
+        {
+            self.frame = CGRectMake(self.superview.frame.size.width - pageControlW - defaultLeftRightMargin+offsetX, pageControlY+offsetY, pageControlW, pageControlH);
+            break;
+        }
+        case DSPageControlModeBottomLeft:
+        {
+            self.frame = CGRectMake(defaultLeftRightMargin+offsetX, pageControlY+offsetY, pageControlW, pageControlH);
+            break;
+        }
+            
+        default:
+            break;
+    }
+    // dot frame
+    CGFloat dotViewW = [self dotViewWidth];
+    CGFloat dotViewMargin = [self dotViewMargin];
+    CGFloat dotViewX = 0;
+    CGFloat dotViewY = 0;
+    CGFloat dotViewH = [self dotViewHeight];
+    
+    for(int i =0 ; i < self.subviews.count; i++){
+        UIView* dot = self.subviews[i];
+        dotViewX = (dotViewW+dotViewMargin)*i;
+        dot.frame = CGRectMake(dotViewX,dotViewY,dotViewW, dotViewH);
+    }
 }
 
+
+#pragma mark - private method
 - (void)setUpDots
 {
     for (int i=0; i<self.subviews.count; i++) {
         UIView* dot = self.subviews[i];
-       if (dot.subviews.count == 0) {
-            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.dotViewSize.width, self.dotViewSize.height)];
+        if (dot.subviews.count == 0) {
+            UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [self dotViewWidth], [self dotViewHeight])];
             [dot addSubview:imageView];
         };
-        UIImageView *imageView = dot.subviews[0];
+        UIImageView *imageView = [dot.subviews firstObject];
         if (i == self.currentPage) {
             imageView.image=self.currentPageIndicatorImage;
             dot.backgroundColor = [UIColor clearColor];
@@ -39,17 +86,43 @@
     }
 }
 
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    for(int i =0 ; i < self.subviews.count; i++){
-//        UIView* dot = self.subviews[i];
-//        dot.frame = CGRectMake(dot.frame.origin.x-[self margin]*i, dot.frame.origin.y
-//                               , self.dotViewSize.width, self.dotViewSize.height);
-//    }
-//    
-//    self.backgroundColor  =[UIColor blackColor];
-//}
+- (CGFloat)pageControlHeight
+{
+    CGFloat pageControlH = 7;
+    if(self.dotViewSize.height > 0){
+        pageControlH = self.dotViewSize.height;
+    }
+    return pageControlH;
+}
+
+- (CGFloat)pageControlWidth
+{
+    CGFloat pageControlWidth = self.frame.size.width;
+    if(self.dotViewSize.width > 0){
+        pageControlWidth = [self dotViewMargin] * (self.numberOfPages-1) + [self dotViewWidth]*self.numberOfPages;
+    }
+    return pageControlWidth;
+}
+
+- (CGFloat)dotViewWidth
+{
+    CGFloat dotViewWidth = 7;
+    if(self.dotViewSize.width >0){
+        dotViewWidth = self.dotViewSize.width;
+    }
+    return dotViewWidth;
+}
+
+- (CGFloat)dotViewHeight
+{
+    return [self pageControlHeight];
+}
+
+- (CGFloat)dotViewMargin
+{
+    if(_dotViewMargin) return _dotViewMargin;
+    return 9;
+}
 
 - (CGSize)dotViewSize
 {

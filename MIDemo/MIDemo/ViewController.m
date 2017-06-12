@@ -25,13 +25,13 @@
 //    demo.hiddenPageControl = NO;
 //    demo.autoScroll = NO;
     demo.delegate = self;
-//    demo.pageControlMode = DSPageControlModeBottomRight;
+//    demo.pageControlMode = DSPageControlModeBottomLeft;
     demo.titleLabelFont = [UIFont systemFontOfSize:15];
-//    demo.pageControlInsets = UIEdgeInsetsMake(20, 0, 0, 0);
+//    demo.pageControlInsets = UIEdgeInsetsMake(0, 0, 0, 30);
     demo.pageIndicatorImage = [UIImage imageNamed:@"demo"];
     demo.currentPageIndicatorImage = [UIImage imageNamed:@"demo2"];
-//    demo.dotViewMargin = 2;
-//    demo.dotViewSize = CGSizeMake(50, 3);
+    demo.dotViewMargin = 9;
+//    demo.dotViewSize = CGSizeMake(100, 3);
     demo.currentPageIndicatorTintColor = [UIColor blueColor];
     [self.view addSubview:demo];
     

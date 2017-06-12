@@ -6,7 +6,7 @@
 //  Copyright © 2017年 houxq. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "DSSliderView.h"
 
 @interface DSPageControl : UIPageControl
 
@@ -15,5 +15,8 @@
 
 @property (nonatomic) CGFloat dotViewMargin;
 @property (nonatomic) CGSize dotViewSize;
+
+@property (nonatomic) DSPageControlMode pageControlMode;
+@property (nonatomic) UIEdgeInsets pageControlInsets;   // offset
 
 @end
