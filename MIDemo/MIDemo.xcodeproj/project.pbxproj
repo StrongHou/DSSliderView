@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C336D901EEE7C9F0057EE9F /* NSDictionary+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C336D8F1EEE7C9F0057EE9F /* NSDictionary+Extend.m */; };
+		1C336D961EEEA56F0057EE9F /* DSPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C336D951EEEA56F0057EE9F /* DSPageControl.m */; };
 		1C7A23E61EEC5D02007DC20C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A23E51EEC5D02007DC20C /* main.m */; };
 		1C7A23E91EEC5D02007DC20C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A23E81EEC5D02007DC20C /* AppDelegate.m */; };
 		1C7A23EC1EEC5D02007DC20C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A23EB1EEC5D02007DC20C /* ViewController.m */; };
@@ -18,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C336D8F1EEE7C9F0057EE9F /* NSDictionary+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extend.m"; sourceTree = "<group>"; };
+		1C336D911EEE98730057EE9F /* DSPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSPageControl.h; sourceTree = "<group>"; };
+		1C336D941EEEA1700057EE9F /* NSDictionary+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extend.h"; sourceTree = "<group>"; };
+		1C336D951EEEA56F0057EE9F /* DSPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSPageControl.m; sourceTree = "<group>"; };
 		1C7A23E11EEC5D02007DC20C /* MIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C7A23E51EEC5D02007DC20C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C7A23E71EEC5D02007DC20C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -93,6 +99,10 @@
 				1C7A23FF1EEC5D0E007DC20C /* DSSliderView.m */,
 				1C7A23FC1EEC5D0E007DC20C /* DSSliderCollectionViewCell.h */,
 				1C7A23FD1EEC5D0E007DC20C /* DSSliderCollectionViewCell.m */,
+				1C336D911EEE98730057EE9F /* DSPageControl.h */,
+				1C336D951EEEA56F0057EE9F /* DSPageControl.m */,
+				1C336D941EEEA1700057EE9F /* NSDictionary+Extend.h */,
+				1C336D8F1EEE7C9F0057EE9F /* NSDictionary+Extend.m */,
 			);
 			path = DSSliderView;
 			sourceTree = "<group>";
@@ -168,6 +178,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C336D901EEE7C9F0057EE9F /* NSDictionary+Extend.m in Sources */,
+				1C336D961EEEA56F0057EE9F /* DSPageControl.m in Sources */,
 				1C7A24001EEC5D0E007DC20C /* DSSliderCollectionViewCell.m in Sources */,
 				1C7A24011EEC5D0E007DC20C /* DSSliderView.m in Sources */,
 				1C7A23EC1EEC5D02007DC20C /* ViewController.m in Sources */,
@@ -331,6 +343,7 @@
 				1C7A23FA1EEC5D02007DC20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

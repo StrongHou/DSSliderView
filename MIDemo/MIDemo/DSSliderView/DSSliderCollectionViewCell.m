@@ -11,6 +11,9 @@
 NSString * const kCollectionViewCellImageURL = @"kCollectionViewCellImageURL";
 NSString * const kCollectionViewCellImageNamed = @"kCollectionViewCellImageName";
 NSString * const kCollectionViewCellTitleLabelText = @"kCollectionViewCellTitleLabelText";
+NSString * const kCollectionViewCellTitleLabelTextColor = @"kCollectionViewCellTitleLabelTextColor";
+NSString * const kCollectionViewCellTitleLabelTextFont = @"kCollectionViewCellTitleLabelTextFont";
+NSString * const kCollectionViewCellTitleLabelTBackgroundColor = @"kCollectionViewCellTitleLabelTBackgroundColor";
 NSString * const kCollectionViewCellClickEnable = @"kCollectionViewCellClickEnable";
 NSString * const kCollectionViewCellGOTO = @"kCollectionViewCellGOTO";
 NSString * const kCollectionViewCellImageGOTO  = @"kCollectionViewCellImageGOTO";
@@ -18,6 +21,8 @@ NSString * const kCollectionViewCellTitleLabelGOTO = @"kCollectionViewCellTitleL
 NSString * const kCollectionViewCellPlaceholderImageNamed = @"kCollectionViewCellPlaceholderImage";
 NSString * const kCollectionViewCellClickImageViewBlock = @"kCollectionViewCellClickImageViewBlock";
 NSString * const kCollectionViewCellClickTitleLabelBlock = @"kCollectionViewCellClickTitleLabelBlock";
+
+
 
 @interface DSSliderCollectionViewCell ()
 @property (nonatomic, strong, readwrite) UIImageView *imageView;
@@ -48,7 +53,7 @@ NSString * const kCollectionViewCellClickTitleLabelBlock = @"kCollectionViewCell
     }else {
         self.imageView.frame = self.contentView.bounds;
         CGFloat titleLabelW = self.contentView.bounds.size.width;
-        CGFloat titleLabelH = self.titleLabelHeight;
+        CGFloat titleLabelH = self.titleLabelHeight + self.titleLabelHeight *0.25;
         CGFloat titleLabelX = 0;
         CGFloat titleLabelY = self.contentView.bounds.size.height - titleLabelH;
         self.titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
@@ -83,6 +88,22 @@ NSString * const kCollectionViewCellClickTitleLabelBlock = @"kCollectionViewCell
 - (NSString *)titleLabelText
 {
     return self.cellData[kCollectionViewCellTitleLabelText];
+}
+- (UIColor *)titleLabelColor
+{
+    return self.cellData[kCollectionViewCellTitleLabelTextColor];
+}
+- (UIFont *)titleLabelFont
+{
+    return self.cellData[kCollectionViewCellTitleLabelTextFont];
+}
+- (UIColor *)titleLabelBackgroundColor
+{
+    UIColor *backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    if([self.cellData objectForKey:kCollectionViewCellTitleLabelTBackgroundColor]){
+        backgroundColor = self.cellData[kCollectionViewCellTitleLabelTBackgroundColor];
+    }
+    return backgroundColor;
 }
 
 - (BOOL)cellEnabel
@@ -130,7 +151,10 @@ NSString * const kCollectionViewCellClickTitleLabelBlock = @"kCollectionViewCell
     NSString *titleLabelText = [self titleLabelText];
     if(titleLabelText){
         self.titleLabel.hidden = NO;
-        self.titleLabel.text = titleLabelText;
+        self.titleLabel.text = [NSString stringWithFormat:@"   %@",titleLabelText];
+        self.titleLabel.textColor = [self titleLabelColor];
+        self.titleLabel.font = [self titleLabelFont];
+        self.titleLabel.backgroundColor = [self titleLabelBackgroundColor];
     }else{
         self.titleLabel.hidden = YES;
     }
